@@ -32,5 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/equipos/{id}', [EquipoController::class, 'update'])
         ->whereNumber('id')->name('equipos.update');
 
+    Route::delete('/equipos/{id}', [EquipoController::class, 'destroy'])
+        ->whereNumber('id')->name('equipos.destroy');
+
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 }); 
