@@ -3,6 +3,8 @@
 @section('contenido')
     <h1>Equipos registrados</h1>
 
+    <a href="{{ route('equipos.create') }}">Crear equipo</a>
+
     <table>
         <thead>
             <tr>
