@@ -29,6 +29,9 @@
                     <td>{{ $equipo->estado }}</td>
                     <td>{{ $equipo->created_at }}</td>
                     <td>{{ $equipo->updated_at }}</td>
+                    <td>
+                        <a href="{{ route('equipos.edit', $equipo->id) }}">Editar</a>
+                    </td>
                 </tr>
             @empty
                 <tr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class EquipoController extends Controller
 {
@@ -38,5 +39,33 @@ class EquipoController extends Controller
         $equipo->save();
 
         return redirect()->route('equipos.index')->with('exito', 'Equipo creado correctamente.');
+    }
+
+    public function edit(int $id)
+    {
+        $equipo = Equipo::findOrFail($id);
+
+        return view('equipos.edit', ['equipo' => $equipo]);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $equipo = Equipo::findOrFail($id);
+        $datos = $request->validate([
+            'codigo' => ['required', 'string', 'max:255', Rule::unique('equipos', 'codigo')->ignore($equipo)],
+            'nombre' => ['required', 'string', 'max:100'],
+            'marca' => ['required', 'string', 'max:80'],
+            'fecha_adquisicion' => ['required', 'date'],
+            'estado' => ['required', 'string', 'max:20'],
+        ]);
+
+        $equipo->codigo = $datos['codigo'];
+        $equipo->nombre = $datos['nombre'];
+        $equipo->marca = $datos['marca'];
+        $equipo->fecha_adquisicion = $datos['fecha_adquisicion'];
+        $equipo->estado = $datos['estado'];
+        $equipo->save();
+
+        return redirect()->route('equipos.index')->with('exito', 'Equipo actualizado correctamente.');
     }
 }
