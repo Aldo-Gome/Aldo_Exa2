@@ -2,5 +2,5 @@
 
 @section('contenido')
     <h1>Inicio</h1>
-    <p>Ingresaste correctamente a Inventario.</p>
+    <p>Ingresaste correctamente a Inventario-Equipos</p>
 @endsection
